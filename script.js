@@ -27,11 +27,28 @@ function randomBetween(min, max){
     return Math.floor(Math.random()*(max - min + 1) + min);
 }
 
+function calculateOutcome(outcomeId){
+    switch(outcomeId){
+        case "13":
+        case "21":
+        case "32":
+            return 1;
+        case "12":
+        case "23":
+        case "31":
+            return 0;
+        case "11": case "22": case "33" :
+            return -1;
+    
+    }
+}
+
 function play(playerSelection, computerSelection){
     
-    const outcome = 1;
+    
     
     const outcomeId = playerSelection.toString() + computerSelection;
+    const outcome = calculateOutcome(outcomeId);
     console.log("Outome ID : " + outcomeId);
 
     const outcomeText = (outcome) ? "won" : "lost";
