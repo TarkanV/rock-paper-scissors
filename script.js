@@ -81,7 +81,10 @@ function game(){
             Player wins ; ${playerScore}
             computer wins : ${computerScore} `); 
             
-        }  
+        } 
+    if(playerScore > computerScore) console.log("You win!");
+    else if(computerScore > playerScore) console.log("You lose :o !");
+    else console.log("No one won!");  
     playAgainAnswer = prompt("Do you want to play again? (y/n)");
     playAgain = (playAgainAnswer.toLowerCase() === "y") ? true : false;
     }while(playAgain === true); 
