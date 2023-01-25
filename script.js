@@ -18,10 +18,15 @@ function randomBetween(min, max){
 
 function play(playerSelection, computerSelection){
     
-    const win = true;
-    const outcome = (win) ? "win" : "lose";
-    return `You ${outcome}!`;
+    const outcome = 0;
+    const outcomeText = (outcome) ? "won" : "lost";
+    if(outcome != -1) 
+        console.log(`You ${outcomeText} this round!`);
+    else  
+        console.log("It's a tie!");    
+    return outcome;
 }
+
 
 
 function game(){
@@ -33,6 +38,15 @@ function game(){
             let computerScore = 0;
             const playerSelection = getPlayerChoice();
             const computerSelection = getComputerChoice();
+            switch(play(playerSelection, computerSelection)){
+                case 0: ++computerScore
+                break;
+                case 1: ++playerScore 
+                break;
+            }
+            console.log(`Current results :
+            Player wins ; ${playerScore}
+            computer wins : ${computerScore} `); 
             
         }  
     playAgainAnswer = prompt("Do you want to play again? (y/n)");
