@@ -6,10 +6,21 @@ function getComputerChoice(){
     return choice;
 }
 function getPlayerChoice(){
-    let playerSelection = prompt("Write your choice of hand : ").toLowerCase();
-    console.log(`You chose ${playerSelection}.`);
-    for (let i=0; i < choiceNbr.length; i++) 
-        return (playerSelection == choiceNbr[i]) ? i+1 : "failed";  
+    let playerSelection = "default";
+    do{
+        if(playerSelection != "default")
+            console.log("Invalid input. Try again :v");
+        playerSelection = prompt("Write your choice of hand : ").toLowerCase();
+        console.log(`You chose ${playerSelection}.`);
+        for (let i=0; i < choiceNbr.length; i++) 
+            if((playerSelection == choiceNbr[i]))
+                return i+1;
+           
+    }while(true)
+}
+
+function isInvalidInput(playerSelection){
+    return playerSelection != "rock" || playerSelection != "paper" || playerSelection != "scissors";
 }
 
 function randomBetween(min, max){
@@ -18,7 +29,11 @@ function randomBetween(min, max){
 
 function play(playerSelection, computerSelection){
     
-    const outcome = 0;
+    const outcome = 1;
+    
+    const outcomeId = playerSelection.toString() + computerSelection;
+    console.log("Outome ID : " + outcomeId);
+
     const outcomeText = (outcome) ? "won" : "lost";
     if(outcome != -1) 
         console.log(`You ${outcomeText} this round!`);
@@ -33,9 +48,10 @@ function game(){
     newGame = true;
     console.log("Welcome to Rock Paper Scissors Game!");
     do{
+        let playerScore = 0; 
+        let computerScore = 0;
         for(let i = 0; i < 5; i++){
-            let playerScore = 0; 
-            let computerScore = 0;
+
             const playerSelection = getPlayerChoice();
             const computerSelection = getComputerChoice();
             switch(play(playerSelection, computerSelection)){
