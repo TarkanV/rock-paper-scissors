@@ -28,16 +28,25 @@ function randomBetween(min, max){
 }
 
 function calculateOutcome(outcomeId){
+  
+    
     switch(outcomeId){
-        case "13":
-        case "21":
-        case "32":
-            return 1;
-        case "12":
-        case "23":
+        case "13": 
         case "31":
-            return 0;
+            console.log("Rock beats scissors.");
+            return 1;
+        case "21":
+        case "12":
+            console.log("Paper beats rock.");    
+            return 1;
+        case "32":
+        case "23":
+            console.log("Scissors beat paper.");
+            return 1;
+        
         case "11": case "22": case "33" :
+            //let tieID = (+outcomeId[0]);
+           // console.log(`You did .`);
             return -1;
     
     }
@@ -49,7 +58,6 @@ function play(playerSelection, computerSelection){
     
     const outcomeId = playerSelection.toString() + computerSelection;
     const outcome = calculateOutcome(outcomeId);
-    console.log("Outome ID : " + outcomeId);
 
     const outcomeText = (outcome) ? "won" : "lost";
     if(outcome != -1) 
