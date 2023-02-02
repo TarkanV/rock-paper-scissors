@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald">
     <title>Document</title>
 </head>
 <body>
-    <script src="script.js">
+    <h1>ROCK PAPER SCISSORS</h1>
+    <div id="game">
+        <div id="play">
+            <p id="round-text" class="round">Round:</p>
+            <p id="round-number" class="round">1</p>
+            <p>Choose a Hand: </p>
+            <div class="buttons">
+                <button class="hand rock">👊</button>
+                <button class="hand paper">🤚</button>
+                <button class="hand scissors">🖖</button>
+            </div>
+            <p id="result">Beginning of match!</p>
+            <button id="again">🔄</button>
+        </div>
+        <div class="contestant player">
+            <p class="score">Your score</p>
+            <p class="score" id="score-player">0</p>
+            
+        </div>
+        <div class="contestant cpu">
+            <p class="score">CPU's Score</p>
+            <p class="score" id="score-cpu">0</p>
+        </div>
+    </div>
+    
         
-    </script>
 </body>
 </html>
