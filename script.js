@@ -105,15 +105,11 @@ function game(){
             break;
         }
         resultNode.textContent += outcomeMessage(outcomeId);
-        if(round < 5 && outcome != -1){
-            ++round;
-            roundNode.textContent = round;
-            
-        }
-        else if(outcome == -1){
-
-        }
-        else {
+    
+        ++round;
+        roundNode.textContent = round;
+        
+        if((playerScore == 5 || cpuScore == 5) ) {
             //resultNode.textContent = outcomeMessage(outcomeId) + "\r\n";
             againNode.style.visibility = "visible";
             let winner = (playerScore > cpuScore) ? "\r\nYou won this match!" :
@@ -130,7 +126,7 @@ function game(){
         
 
     againNode.addEventListener("click", () =>{
-        if(round == 5){
+        
             round = 1;
             roundNode.textContent = 1;
             playerScore = 0;
@@ -139,7 +135,7 @@ function game(){
             cpuScoreText.textContent = "0";
             resultNode.textContent = "Beginning of match!";
             againNode.style.visibility = "hidden";
-        }
+        
 
     });
     
