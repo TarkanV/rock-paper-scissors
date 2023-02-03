@@ -36,7 +36,7 @@ function outcomeMessage(outcomeId){
         case "13":  case "31":
             return "Rock beats scissors.";
         case "21":  case "12":
-            return "Paper beats rock";
+            return "Paper beats rock.";
         case "32":  case "23":
             return "Scissors beat paper.";
         case "11": case "22": case "33" :
@@ -70,34 +70,78 @@ function game(){
     let hands = document.querySelectorAll(".hand");
     let resultNode = document.querySelector("#result");
     resultNode.setAttribute('style', 'white-space: pre;');
-    let playerScore;
-    let cpuScore;
+    let round = 1;
+    const roundNode = document.querySelector("#round-number");
+    let playerScore = 0;
+    const playerScoreText = document.querySelector("#score-player");
+    let cpuScore = 0;
+    const cpuScoreText = document.querySelector("#score-cpu");
     let playerChoice;
     let cpuChoice; 
+    const againNode = document.querySelector("#again");
     
     //Main game event
-    hands.forEach(hand => hand.addEventListener("click", (e) => {
+    
+      hands.forEach(hand => hand.addEventListener("click", (e) => {
         resultNode.textContent = "";
         playerChoice = getPlayerChoice(e);
         resultNode.textContent += `You chose ${choiceID[playerChoice-1]}.\r\n`;
         cpuChoice = getComputerChoice();
-        resultNode.textContent += `The computer chose ${choiceID[cpuChoice-1]}.\r\n`;
+        resultNode.textContent += `The computer chose ${choiceID[cpuChoice-1]}. `;
 
         const outcomeId = playerChoice.toString() + cpuChoice;
-
-        switch(play(outcomeId)){
-            case 0: ++cpuScore
-                resultNode.textContent += "YOU LOSE\r\n";
+        let outcome = play(outcomeId);
+        switch(outcome){
+            case 0: 
+                cpuScoreText.textContent = (++cpuScore).toString();
+                resultNode.textContent += "MISSED!\r\n";
             break;
-            case 1: ++playerScore 
-                resultNode.textContent += "YOU WIN\r\n";
+            case 1: 
+                playerScoreText.textContent = (++playerScore).toString(); 
+                resultNode.textContent += "CORRECT!\r\n";
             break;
             default: 
-            resultNode.textContent +="TIE\r\n";
+            resultNode.textContent +="TIE!\r\n";
+            break;
         }
         resultNode.textContent += outcomeMessage(outcomeId);
+        if(round < 5 && outcome != -1){
+            ++round;
+            roundNode.textContent = round;
+            
+        }
+        else if(outcome == -1){
 
+        }
+        else {
+            //resultNode.textContent = outcomeMessage(outcomeId) + "\r\n";
+            againNode.style.visibility = "visible";
+            let winner = (playerScore > cpuScore) ? "\r\nYou won this match!" :
+                         (playerScore < cpuScore) ? "\r\nYou lost  this match!":
+                         "This match ends in a tie!";
+            resultNode.textContent += winner + " Would you like a rematch?\r\n";
+        } 
+        
+
+       
+        
     } ));
+    
+        
+
+    againNode.addEventListener("click", () =>{
+        if(round == 5){
+            round = 1;
+            roundNode.textContent = 1;
+            playerScore = 0;
+            playerScoreText.textContent = "0";
+            cpuScore = 0;
+            cpuScoreText.textContent = "0";
+            resultNode.textContent = "Beginning of match!";
+            againNode.style.visibility = "hidden";
+        }
+
+    });
     
     
    // do{
